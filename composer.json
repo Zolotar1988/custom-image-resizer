@@ -19,7 +19,7 @@
     "repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/Zolotar1988/MIRBundle.git "
+            "url": "https://github.com/Zolotar1988/custom-image-resizer.git"
         }
     ]
 }
