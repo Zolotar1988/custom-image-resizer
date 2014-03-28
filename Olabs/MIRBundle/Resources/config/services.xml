@@ -10,7 +10,7 @@
     </service>
     <service id="olabs.main.image_gallery_manager" class="Olabs\MIRBundle\Service\ImageGalleryManager">
         <argument type="service" id ="doctrine.orm.entity_manager"/>
-        <argument type="service" id ="lukoil.main.image_handler"/>
+        <argument type="service" id ="olabs.main.image_handler"/>
         <argument>%images_gallery_sizes%</argument>
     </service>
 </services>

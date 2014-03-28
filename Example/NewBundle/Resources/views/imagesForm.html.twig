@@ -1,0 +1,50 @@
+{% set subformProto = '
+    <div class="subform">
+        <div class="grid4">
+            <input type="file" id="' ~ entityName ~ '_form_images___name___image_file" name="' ~ entityName ~ '_form[images][__name__][image][file]" />
+        </div>
+    </div>
+    ' %}
+
+<div class="imageSubforms fluid clearfix">
+    <span class="input-label">{{ images.vars.label }}</span>
+    <div class="fluid clearfix">
+        {% for entity_image in images %}
+            <div class="grid1" id="existed_image_{{ loop.index }}">
+                <div style="display: none">
+                    {{ form_row(entity_image.images.images.image.file) }}
+                </div>
+
+                <div>
+
+                    <img src="{{ entity_image.vars.data.getThumbnail.image.getWebPath }}">
+
+                </div>
+                <div>
+                    <a href="#" onclick="$('#existed_image_{{ loop.index }}').remove();return false;" style="text-decoration:none; border-bottom:1px dashed;">Remove</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="subformsCollection fluid clearfix" data-prototype="{{ subformProto | e}}"  style="margin-top: 15px;">
+    </div>
+
+    <div class="fluid">
+        <a class="addSubform" href="#" style="text-decoration:none; border-bottom:1px dashed;">Add image</a>
+    </div>
+</div>
+
+{#<div style="margin-top: 40px;" class="fluid clearfix">#}
+    {#{% for entity_image in images %}#}
+        {#<div>#}
+            {#<a href="#" onclick="$('#existed_image_{{ loop.index }}').remove(); $(this).remove(); return false;" style="text-decoration:none; border-bottom:1px dashed;">Remove {{ loop.index }}</a>#}
+        {#</div>#}
+    {#{% endfor %}#}
+    {#{% for i in 1..4 %}#}
+        {#<div class="subform">#}
+            {#<input type="file" id="{{ entityName }}_form_images_{{ images.count + i }}_image_file"#}
+                   {#name="{{ entityName }}_form[images][{{ images.count + i }}][image][file]">#}
+        {#</div>#}
+    {#{% endfor %}#}
+{#</div>#}
