@@ -19,7 +19,7 @@ MIRBundle
                 thumbnail:
                     width: 320
                     height: 240
-
+=========
 
 image_resize:
   image_loader:
