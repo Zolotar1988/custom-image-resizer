@@ -185,7 +185,7 @@ class MappedEntityImage extends EntityImage
     /**
      * Set parent
      *
-     * @param \Olabs\MIRBundle\Entity\\InfoImage $parent
+     * @param \Olabs\MIRBundle\Entity\InfoImage $parent
      * @return InfoImage
      */
     public function setParent(\Lukoil\MainBundle\Entity\InfoImage $parent = null)
