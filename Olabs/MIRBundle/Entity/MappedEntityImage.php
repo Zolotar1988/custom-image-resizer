@@ -16,7 +16,7 @@ class MappedEntityImage extends EntityImage
 {
     /**
      * @var Image
-     * @ORM\OneToOne(targetEntity="Image", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="Olabs\MIRBundle\Entity\Image", cascade={"persist"})
      * @ORM\JoinColumn(name="image_id", referencedColumnName="id", nullable=false)
      */
     protected $image;
@@ -31,13 +31,13 @@ class MappedEntityImage extends EntityImage
     protected $size_category;
 
     /**
-     * @ORM\OneToMany(targetEntity="EntityImage", mappedBy="parent")
+     * @ORM\OneToMany(targetEntity="Olabs\MIRBundle\Entity\EntityImage", mappedBy="parent")
      */
     protected $children;
 
     /**
      * @var
-     * @ORM\ManyToOne(targetEntity="EntityImage", inversedBy="children")
+     * @ORM\ManyToOne(targetEntity="Olabs\MIRBundle\Entity\EntityImage", inversedBy="children")
      * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", nullable=true)
      */
     protected $parent;
@@ -58,7 +58,42 @@ class MappedEntityImage extends EntityImage
             $this->setCreatedDate($currentDateTime);
         }
     }
+    /**
+     * Get thumbnail
+     *
+     * @return \Olabs\MIRBundle\Entity\Image
+     */
+    public function getThumbnail()
+    {
+        $thumbnail = new Image();
+        foreach ($this->children as $child) {
+            if ($child->getSizeCategory() == 'main_thumbnail') {
+                $thumbnail = $child;
+            }
+        }
+        return $thumbnail;
+    }
+    /**
+     * Get children
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getChildren()
+    {
+        return $this->children;
+    }
+    /**
+     * Set size_type
+     *
+     * @param string $sizeType
+     * @return InfoImage
+     */
+    public function setSizeType($sizeType)
+    {
+        $this->size_type = $sizeType;
 
+        return $this;
+    }
     /**
      * Constructor
      */
@@ -70,7 +105,7 @@ class MappedEntityImage extends EntityImage
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -93,7 +128,7 @@ class MappedEntityImage extends EntityImage
     /**
      * Get size_category
      *
-     * @return string 
+     * @return string
      */
     public function getSizeCategory()
     {
@@ -116,7 +151,7 @@ class MappedEntityImage extends EntityImage
     /**
      * Get created_date
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreatedDate()
     {
@@ -150,10 +185,10 @@ class MappedEntityImage extends EntityImage
     /**
      * Set parent
      *
-     * @param \Olabs\MIRBundle\Entity\EntityImage $parent
+     * @param \Olabs\MIRBundle\Entity\\InfoImage $parent
      * @return InfoImage
      */
-    public function setParent(\Olabs\MIRBundle\Entity\EntityImage $parent = null)
+    public function setParent(\Lukoil\MainBundle\Entity\InfoImage $parent = null)
     {
         $this->parent = $parent;
 
@@ -163,7 +198,7 @@ class MappedEntityImage extends EntityImage
     /**
      * Get parent
      *
-     * @return \Olabs\MIRBundle\Entity\EntityImage
+     * @return \Olabs\MIRBundle\Entity\\InfoImage
      */
     public function getParent()
     {

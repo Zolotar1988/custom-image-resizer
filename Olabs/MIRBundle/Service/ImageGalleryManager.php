@@ -2,10 +2,10 @@
 
 namespace Olabs\MIRBundle\Service;
 
-
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManager;
 use Olabs\MIRBundle\Entity\Image;
+use Olabs\MIRBundle\Entity\Info as Info;
 
 class ImageGalleryManager
 {
@@ -24,20 +24,15 @@ class ImageGalleryManager
         $this->gallerySizes = $gallerySizes;
     }
 
-    public function processEntityGallerySave($entity)
+    public function processGallerySaveImages($entity, $entityImages)
     {
         $originalImages = new ArrayCollection();
 
         //if update
         if ($entity->getId()) {
-//            $entityRepo = $this->getEntityRepo($entity);
-//            $originalImages = $entityRepo->getImages($entity->getId());
             $entityImageRepo = $this->em->getRepository('OlabsMIRBundle:EntityImage');
             $originalImages = $entityImageRepo->getImages($this->getEntityName($entity), $entity->getId());
         }
-
-        //get new entity images
-        $entityImages = $entity->getImages();
 
         $entityGallerySizes = $this->gallerySizes[$this->getEntityName($entity)];
 
@@ -65,6 +60,18 @@ class ImageGalleryManager
         }
     }
 
+    public function processGallerySaveImage($entity, $entityImage, $entityImageName)
+    {
+        if ($entityImage->getImage() != null) {
+            if ($entityImage->getImage()->getFile() != null) {
+                $this->deleteEntityImage($entityImage);
+                $logoGallerySizes = $this->gallerySizes[$this->getEntityName($entity)][$entityImageName];
+                $uploadSubdirectory = strtolower($this->getEntityName($entity));
+                $this->imageHandler->uploadImage($entityImage->getImage(), $uploadSubdirectory);
+                $this->saveResizedImages($entityImage, $logoGallerySizes);
+            }
+        }
+    }
     /**
      * @todo create base class to all entityImages classes
      * @param $entityImage
@@ -138,5 +145,4 @@ class ImageGalleryManager
         $nameParts = explode('\\', get_class($entity));
         return array_pop($nameParts);
     }
-
 } 
