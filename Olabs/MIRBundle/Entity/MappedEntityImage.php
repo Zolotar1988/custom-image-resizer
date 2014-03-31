@@ -198,7 +198,7 @@ class MappedEntityImage extends EntityImage
     /**
      * Get parent
      *
-     * @return \Olabs\MIRBundle\Entity\\InfoImage
+     * @return \Olabs\MIRBundle\Entity\InfoImage
      */
     public function getParent()
     {
