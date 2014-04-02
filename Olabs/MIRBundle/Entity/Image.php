@@ -46,7 +46,7 @@ class Image
      * @ORM\Column(name="width", type="integer")
      * @Assert\NotBlank
      * @JMS\Expose
-     * @JMS\Groups({"info_list", "info_get"})
+     * @JMS\Groups({"action_list", "action_get", "shop_list", "shop_get", "info_list", "info_get", "recipe_list", "recipe_get", "product_list", "product_get"})
      */
     private $width;
 
@@ -56,7 +56,7 @@ class Image
      * @ORM\Column(name="height", type="integer")
      * @Assert\NotBlank
      * @JMS\Expose
-     * @JMS\Groups({"info_list", "info_get"})
+     * @JMS\Groups({"action_list", "action_get", "shop_list", "shop_get", "info_list", "info_get", "recipe_list", "recipe_get", "product_list", "product_get"})
      */
     private $height;
 
@@ -75,11 +75,24 @@ class Image
 
     /**
      * @JMS\VirtualProperty
-     * @JMS\Groups({"info_list", "info_get"})
+     * @JMS\Groups({"action_list", "action_get", "shop_list", "shop_get", "info_list", "info_get", "recipe_list", "recipe_get", "product_list", "product_get"})
      * @JMS\SerializedName("url")
      * @JMS\Type("string")
      * @return null|string
      */
+    public function getAbsoluteWebPath()
+    {
+        global $kernel;
+        if ('AppCache' == get_class($kernel)) {
+            $kernel = $kernel->getKernel();
+        }
+        $host = $kernel->getContainer()->get('router')->getContext()->getHost();
+        return null === $this->path
+            ? null
+            : 'http://' . $host . $this->getWebPath();
+    }
+
+
     public function getWebPath()
     {
         return null === $this->path
@@ -157,11 +170,10 @@ class Image
     }
 
 
-
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -184,10 +196,12 @@ class Image
     /**
      * Get path
      *
-     * @return string 
+     * @return string
      */
     public function getPath()
     {
+        //@todo tmp hardcode
+//        return '/images/logo.png';
         return $this->path;
     }
 
@@ -207,7 +221,7 @@ class Image
     /**
      * Get width
      *
-     * @return integer 
+     * @return integer
      */
     public function getWidth()
     {
@@ -230,7 +244,7 @@ class Image
     /**
      * Get height
      *
-     * @return integer 
+     * @return integer
      */
     public function getHeight()
     {
@@ -253,12 +267,13 @@ class Image
     /**
      * Get created_date
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreatedDate()
     {
         return $this->created_date;
     }
+
     /**
      * @param UploadedFile $file
      * @return $this
@@ -279,5 +294,4 @@ class Image
     {
         return $this->file;
     }
-
 }

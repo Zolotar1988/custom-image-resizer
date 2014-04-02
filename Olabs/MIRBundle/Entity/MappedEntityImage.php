@@ -10,10 +10,11 @@ use JMS\Serializer\Annotation as JMS;
 
 /**
  * @ORM\MappedSuperclass
- * @JMS\ExclusionPolicy("all")
+ * @JMS\ExclusionPolicy("none")
  */
 class MappedEntityImage extends EntityImage
 {
+
     /**
      * @var Image
      * @ORM\OneToOne(targetEntity="Olabs\MIRBundle\Entity\Image", cascade={"persist"})
@@ -25,22 +26,16 @@ class MappedEntityImage extends EntityImage
      * Size category of resized image
      * @var String
      * @ORM\Column(name="size_category", type="string", nullable=true)
-     * @JMS\Expose
-     * @JMS\Groups({"info_get"})
      */
     protected $size_category;
 
     /**
-     * @ORM\OneToMany(targetEntity="Olabs\MIRBundle\Entity\EntityImage", mappedBy="parent")
+     * Size type of resized image
+     * @var String
+     * @ORM\Column(name="size_type", type="string", nullable=true)
      */
-    protected $children;
+    protected $size_type;
 
-    /**
-     * @var
-     * @ORM\ManyToOne(targetEntity="Olabs\MIRBundle\Entity\EntityImage", inversedBy="children")
-     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", nullable=true)
-     */
-    protected $parent;
 
     /**
      * Creation date
@@ -48,16 +43,6 @@ class MappedEntityImage extends EntityImage
      */
     protected $created_date;
 
-    /**
-     * @ORM\PrePersist
-     */
-    protected function prePersist()
-    {
-        $currentDateTime = new \DateTime();
-        if (!$this->getCreatedDate()) {
-            $this->setCreatedDate($currentDateTime);
-        }
-    }
     /**
      * Get thumbnail
      *
@@ -73,27 +58,18 @@ class MappedEntityImage extends EntityImage
         }
         return $thumbnail;
     }
-    /**
-     * Get children
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getChildren()
-    {
-        return $this->children;
-    }
-    /**
-     * Set size_type
-     *
-     * @param string $sizeType
-     * @return InfoImage
-     */
-    public function setSizeType($sizeType)
-    {
-        $this->size_type = $sizeType;
 
-        return $this;
+    /**
+     * @ORM\PrePersist
+     */
+    public function prePersist()
+    {
+        $currentDateTime = new \DateTime();
+        if (!$this->getCreatedDate()) {
+            $this->setCreatedDate($currentDateTime);
+        }
     }
+
     /**
      * Constructor
      */
@@ -113,33 +89,10 @@ class MappedEntityImage extends EntityImage
     }
 
     /**
-     * Set size_category
-     *
-     * @param string $sizeCategory
-     * @return EntityImage
-     */
-    public function setSizeCategory($sizeCategory)
-    {
-        $this->size_category = $sizeCategory;
-
-        return $this;
-    }
-
-    /**
-     * Get size_category
-     *
-     * @return string
-     */
-    public function getSizeCategory()
-    {
-        return $this->size_category;
-    }
-
-    /**
      * Set created_date
      *
      * @param \DateTime $createdDate
-     * @return EntityImage
+     * @return \Olabs\MIRBundle\Entity\EntityImage
      */
     public function setCreatedDate($createdDate)
     {
@@ -161,10 +114,10 @@ class MappedEntityImage extends EntityImage
     /**
      * Set image
      *
-     * @param Image $image
-     * @return MappedEntityImage
+     * @param \Olabs\MIRBundle\Entity\Image $image
+     * @return \Olabs\MIRBundle\Entity\EntityImage
      */
-    public function setImage(Image $image)
+    public function setImage(\Olabs\MIRBundle\Entity\Image $image)
     {
         $this->image = $image;
 
@@ -174,7 +127,7 @@ class MappedEntityImage extends EntityImage
     /**
      * Get image
      *
-     * @return Image
+     * @return \Olabs\MIRBundle\Entity\Image
      */
     public function getImage()
     {
@@ -183,25 +136,48 @@ class MappedEntityImage extends EntityImage
 
 
     /**
-     * Set parent
+     * Set size_category
      *
-     * @param \Olabs\MIRBundle\Entity\InfoImage $parent
-     * @return InfoImage
+     * @param string $sizeCategory
+     * @return \Olabs\MIRBundle\Entity\EntityImage
      */
-    public function setParent(\Lukoil\MainBundle\Entity\InfoImage $parent = null)
+    public function setSizeCategory($sizeCategory)
     {
-        $this->parent = $parent;
+        $this->size_category = $sizeCategory;
 
         return $this;
     }
 
     /**
-     * Get parent
+     * Get size_category
      *
-     * @return \Olabs\MIRBundle\Entity\InfoImage
+     * @return string
      */
-    public function getParent()
+    public function getSizeCategory()
     {
-        return $this->parent;
+        return $this->size_category;
+    }
+
+    /**
+     * Set size_type
+     *
+     * @param string $sizeType
+     * @return \Olabs\MIRBundle\Entity\EntityImage
+     */
+    public function setSizeType($sizeType)
+    {
+        $this->size_type = $sizeType;
+
+        return $this;
+    }
+
+    /**
+     * Get size_type
+     *
+     * @return string
+     */
+    public function getSizeType()
+    {
+        return $this->size_type;
     }
 }

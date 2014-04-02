@@ -5,7 +5,6 @@ namespace Olabs\MIRBundle\Service;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManager;
 use Olabs\MIRBundle\Entity\Image;
-use Olabs\MIRBundle\Entity\Info as Info;
 
 class ImageGalleryManager
 {
@@ -26,8 +25,6 @@ class ImageGalleryManager
 
     public function processGallerySaveImages($entity, $entityImages)
     {
-        $originalImages = new ArrayCollection();
-
         //if update
         if ($entity->getId()) {
             $entityImageRepo = $this->em->getRepository('OlabsMIRBundle:EntityImage');
@@ -35,6 +32,46 @@ class ImageGalleryManager
         }
 
         $entityGallerySizes = $this->gallerySizes[$this->getEntityName($entity)];
+
+        //add new images
+        foreach ($entityImages as $entityImage) {
+            if (false === $originalImages->contains($entityImage)) {
+                //remove empty new images
+                $image = $entityImage->getImage();
+                if (!$image) {
+                    $entity->removeImage($entityImage);
+                    continue;
+                }
+                $uploadSubdirectory = strtolower($this->getEntityName($entity));
+                $this->imageHandler->uploadImage($image, $uploadSubdirectory);
+                //save resized copies
+                $this->saveResizedImages($entityImage, $entityGallerySizes);
+            }
+        }
+
+        //remove deleted entity images
+        foreach ($originalImages as $entityImage) {
+            if (false === $entityImages->contains($entityImage)) {
+                $this->deleteEntityImage($entityImage);
+            }
+        }
+    }
+    public function processEntityGallerySave($entity)
+    {
+        $originalImages = new ArrayCollection();
+
+        //if update
+        if ($entity->getId()) {
+//            $entityRepo = $this->getEntityRepo($entity);
+//            $originalImages = $entityRepo->getImages($entity->getId());
+            $entityImageRepo = $this->em->getRepository('OlabsMIRBundle:EntityImage');
+            $originalImages = $entityImageRepo->getImages($this->getEntityName($entity), $entity->getId());
+        }
+
+        //get new entity images
+        $entityImages = $entity->getImages();
+
+        $entityGallerySizes = $this->gallerySizes[$this->getEntityName($entity)]['images'];
 
         //add new images
         foreach ($entityImages as $entityImage) {

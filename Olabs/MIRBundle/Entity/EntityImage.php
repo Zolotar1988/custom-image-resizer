@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="entity_image")
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name="entity_name", type="string")
- * @ORM\DiscriminatorMap({"info" = "InfoImage"})
+ * @ORM\DiscriminatorMap({"product" = "ProductImage"})
  */
 class EntityImage
 {
