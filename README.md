@@ -476,6 +476,7 @@ you_project/Controller/ProductController.php
     }
 you_project/Resources/views/Product/edit.html.twig    
 =========   
+    .............
     {% block javascripts %}
     {{ parent() }}
 
@@ -492,8 +493,10 @@ you_project/Resources/views/Product/edit.html.twig
     {{ form_widget(form.logo.image.file, {'attr': {
     'class': 'file' }}) }}
     {{ form_errors(form.logo) }}
+    .............
     
     {{ include('YouProjectBundle::imagesForm.html.twig', {'images':form.images, 'entityName':'product'}) }}
+    .............
     
 you_project/Resources/views/imagesForm.html.twig    
 =========  
