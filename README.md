@@ -343,7 +343,7 @@ ProductImage.php
     }
     }
     
-ProductImage.php    
+you_project\Form\Type\ProductType.php    
 =========   
     <?php
 
