@@ -39,13 +39,15 @@ MIRBundle
               thumbnail:
                 width: 320
                 height: 240
+MIRBundle
 =========
 #/app/config/config.yml
-image_resize:
-  image_loader:
-    imagine_class: 'Imagine\Gd\Imagine'
-    type: 'file'
-=========   
+    image_resize:
+        image_loader:
+            imagine_class: 'Imagine\Gd\Imagine'
+            type: 'file'
+MIRBundle
+=========  
 <?php
 
 namespace you_project\Entity;
