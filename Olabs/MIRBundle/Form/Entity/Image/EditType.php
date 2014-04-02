@@ -1,6 +1,6 @@
 <?php
 
-namespace Olabs\MIRBundle\Form\Type\Info\Image;
+namespace Olabs\MIRBundle\Form\Entity\Image;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
