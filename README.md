@@ -211,7 +211,7 @@ Product.php
     /**
      * Set image
      *
-     * @param \you_project\Entity\Image $image
+     * @param \Olabs\MirBundle\Entity\Image $image
      * @return ProductImage
      */
     public function setImages(\Doctrine\Common\Collections\Collection $images)
