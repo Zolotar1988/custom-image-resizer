@@ -1,5 +1,7 @@
 MIRBundle
 =========
+Example
+=========
 #/app/config/parameters.yml
     images_gallery_sizes:
         Product:
