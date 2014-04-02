@@ -211,7 +211,7 @@ Product.php
     /**
      * Set image
      *
-     * @param \Lukoil\MainBundle\Entity\Image $image
+     * @param \you_project\Entity\Image $image
      * @return ProductImage
      */
     public function setImages(\Doctrine\Common\Collections\Collection $images)
