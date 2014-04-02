@@ -41,7 +41,7 @@ MIRBundle
                 height: 240
 AppKernel.php
 =========
-new Olabs\MIRBundle\OlabsMIRBundle(),
+    new Olabs\MIRBundle\OlabsMIRBundle(),
 =========
 #/app/config/config.yml
     image_resize:
