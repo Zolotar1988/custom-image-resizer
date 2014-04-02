@@ -1,4 +1,4 @@
-MIRBundle
+Olabs/MIRBundle
 =========
 Example
 =========
