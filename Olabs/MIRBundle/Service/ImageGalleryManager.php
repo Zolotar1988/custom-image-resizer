@@ -182,4 +182,19 @@ class ImageGalleryManager
         $nameParts = explode('\\', get_class($entity));
         return array_pop($nameParts);
     }
+ public function setLogo($entity)
+    {
+        //method assumes $entity has properties logo and image that are instances of class EntityImage
+        $logo = $entity->getLogo();
+        if ($logo->getImage() != null) {
+            if ($logo->getImage()->getFile() != null) {
+                $this->deleteEntityImage($logo);
+                $logoGallerySizes = $this->gallerySizes[$this->getEntityName($entity)]['logo'];
+                $uploadSubdirectory = strtolower($this->getEntityName($entity));
+                $this->imageHandler->uploadImage($logo->getImage(), $uploadSubdirectory);
+                $this->saveResizedImages($logo, $logoGallerySizes);
+                $entity->setLogo($logo);
+            }
+        }
+    }
 } 
