@@ -46,7 +46,7 @@ class Image
      * @ORM\Column(name="width", type="integer")
      * @Assert\NotBlank
      * @JMS\Expose
-     * @JMS\Groups({"action_list", "action_get", "shop_list", "shop_get", "info_list", "info_get", "recipe_list", "recipe_get", "product_list", "product_get"})
+     * @JMS\Groups({"action_list", "action_get", "shop_list", "shop_get", "info_list", "info_get", "recipe_list", "recipe_get", "product_list", "product_get", "partner_list", "partner_get", "news_list", "news_get"})
      */
     private $width;
 
@@ -56,7 +56,7 @@ class Image
      * @ORM\Column(name="height", type="integer")
      * @Assert\NotBlank
      * @JMS\Expose
-     * @JMS\Groups({"action_list", "action_get", "shop_list", "shop_get", "info_list", "info_get", "recipe_list", "recipe_get", "product_list", "product_get"})
+     * @JMS\Groups({"action_list", "action_get", "shop_list", "shop_get", "info_list", "info_get", "recipe_list", "recipe_get", "product_list", "product_get", "partner_list", "partner_get", "news_list", "news_get"})
      */
     private $height;
 
@@ -75,7 +75,7 @@ class Image
 
     /**
      * @JMS\VirtualProperty
-     * @JMS\Groups({"action_list", "action_get", "shop_list", "shop_get", "info_list", "info_get", "recipe_list", "recipe_get", "product_list", "product_get"})
+     * @JMS\Groups({"action_list", "action_get", "shop_list", "shop_get", "info_list", "info_get", "recipe_list", "recipe_get", "product_list", "product_get", "partner_list", "partner_get", "news_list", "news_get"})
      * @JMS\SerializedName("url")
      * @JMS\Type("string")
      * @return null|string
