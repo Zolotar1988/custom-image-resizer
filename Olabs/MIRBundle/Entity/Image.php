@@ -100,11 +100,11 @@ class Image
             : $this->getUploadDir() . '/' . $this->path;
     }
 
-    public function getUploadRootDir()
+        public function getUploadRootDir()
     {
         // the absolute directory path where uploaded
         // documents should be saved
-        return __DIR__.'/../../../../web' . $this->getUploadDir();
+        return __DIR__.'/../../../../../../web' . $this->getUploadDir();
     }
 
     public function getUploadDir()
