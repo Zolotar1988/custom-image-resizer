@@ -6,10 +6,7 @@
     "license": "MIT",
     "minimum-stability": "dev",
     "require": {
-        "php": ">=5.3.3",
-        "imagine/imagine": "0.6.*@dev",
-        "antwebes/image-resize-bundle": "dev-master",
-        "jms/serializer-bundle": "dev-master"
+        "imagine/imagine": "0.6.*@dev"
     },
 
     "autoload": {
