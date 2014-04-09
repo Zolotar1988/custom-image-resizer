@@ -13,8 +13,8 @@
     },
 
     "autoload": {
-        "psr-0": ["Olabs\\MIRBundle": ""],
-        ["DCS\\DynamicDiscriminatorMapBundle": ""]
+        "psr-0": {"Olabs\\MIRBundle": ""},
+        "psr-4":{"DCS\\DynamicDiscriminatorMapBundle": ""}
     },
 
     "repositories": [
