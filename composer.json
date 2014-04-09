@@ -10,11 +10,11 @@
         "imagine/imagine": "0.6.*@dev",
         "antwebes/image-resize-bundle": "dev-master",
         "jms/serializer-bundle": "dev-master",
-        "damianociarla/dynamic-discriminator-map-bundle": "dev-master"
     },
 
     "autoload": {
-        "psr-0": {"Olabs\\MIRBundle": ""}
+        "psr-0": {"Olabs\\MIRBundle": ""},
+        "psr-1": { "DCS\\DynamicDiscriminatorMapBundle": "" }
     },
 
     "repositories": [
