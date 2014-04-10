@@ -6,7 +6,6 @@
     "license": "MIT",
     "minimum-stability": "dev",
     "require": {
-        "imagine/imagine": "0.6.*@dev"
     },
 
     "autoload": {
