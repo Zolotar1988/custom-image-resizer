@@ -5,6 +5,7 @@ namespace Olabs\MIRBundle\Service;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManager;
 use Olabs\MIRBundle\Entity\Image;
+use Olabs\MIRBundle\Entity\MappedEntityImage;
 
 class ImageGalleryManager
 {
