@@ -63,6 +63,8 @@ class Image
     /**
      * Creation date
      * @ORM\Column(type="datetime", nullable=true)
+     * @JMS\Expose
+     * @JMS\Groups({"partner_cat_get", "partner_cat_list", "action_list", "action_get", "shop_list", "shop_get", "info_list", "info_get", "recipe_list", "recipe_get", "product_list", "product_get", "partner_list", "partner_get", "news_list", "news_get"})
      */
     private $created_date;
 
