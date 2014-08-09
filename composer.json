@@ -13,7 +13,8 @@
         "psr-0": {"Olabs\\MIRBundle": "",
             "DCS\\DynamicDiscriminatorMapBundle": "",
             "Ant\\ImageResizeBundle": "",
-            "Avalanche\\Bundle\\ImagineBundle": ""}
+            "Avalanche\\Bundle\\ImagineBundle": "",
+            "Cunningsoft\\ChatBundle": ""}
     },
 
     "repositories": [
