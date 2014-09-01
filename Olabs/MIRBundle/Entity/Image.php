@@ -6,7 +6,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
-use JMS\Serializer\Annotation as JMS;
 
 /**
  * Info
@@ -14,7 +13,6 @@ use JMS\Serializer\Annotation as JMS;
  * @ORM\Table(name="image")
  * @ORM\Entity()
  * @ORM\HasLifecycleCallbacks()
- * @JMS\ExclusionPolicy("all")
 */
 class Image
 {
@@ -45,8 +43,6 @@ class Image
      * @var int
      * @ORM\Column(name="width", type="integer")
      * @Assert\NotBlank
-     * @JMS\Expose
-     * @JMS\Groups({"partner_cat_get", "partner_cat_list", "action_list", "action_get", "shop_list", "shop_get", "info_list", "info_get", "recipe_list", "recipe_get", "product_list", "product_get", "partner_list", "partner_get", "news_list", "news_get"})
      */
     private $width;
 
@@ -55,16 +51,12 @@ class Image
      * @var int
      * @ORM\Column(name="height", type="integer")
      * @Assert\NotBlank
-     * @JMS\Expose
-     * @JMS\Groups({"partner_cat_get", "partner_cat_list","action_list", "action_get", "shop_list", "shop_get", "info_list", "info_get", "recipe_list", "recipe_get", "product_list", "product_get", "partner_list", "partner_get", "news_list", "news_get"})
      */
     private $height;
 
     /**
      * Creation date
      * @ORM\Column(type="datetime", nullable=true)
-     * @JMS\Expose
-     * @JMS\Groups({"partner_cat_get", "partner_cat_list", "action_list", "action_get", "shop_list", "shop_get", "info_list", "info_get", "recipe_list", "recipe_get", "product_list", "product_get", "partner_list", "partner_get", "news_list", "news_get"})
      */
     private $created_date;
 
@@ -76,10 +68,6 @@ class Image
     }
 
     /**
-     * @JMS\VirtualProperty
-     * @JMS\Groups({"partner_cat_get", "partner_cat_list","action_list", "action_get", "shop_list", "shop_get", "info_list", "info_get", "recipe_list", "recipe_get", "product_list", "product_get", "partner_list", "partner_get", "news_list", "news_get"})
-     * @JMS\SerializedName("url")
-     * @JMS\Type("string")
      * @return null|string
      */
     public function getAbsoluteWebPath()
