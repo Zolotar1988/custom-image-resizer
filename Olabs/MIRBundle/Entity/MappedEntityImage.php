@@ -56,6 +56,22 @@ class MappedEntityImage extends EntityImage
         }
         return $thumbnail;
     }
+    
+        /**
+     * Get thumbnail
+     *
+     * @return \Olabs\MIRBundle\Entity\Image
+     */
+    public function getFullSize()
+    {
+        $thumbnail = new Image();
+        foreach ($this->children as $child) {
+            if ($child->getSizeCategory() == 'full_size') {
+                $thumbnail = $child;
+            }
+        }
+        return $thumbnail;
+    }
 
     /**
      * @ORM\PrePersist
